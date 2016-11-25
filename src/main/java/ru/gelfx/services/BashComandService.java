@@ -13,6 +13,7 @@ public class BashComandService {
     public String getHello(){
         return "Hello";
     }
+
     public String executeCommand(String command) {
 
         StringBuffer output = new StringBuffer();
