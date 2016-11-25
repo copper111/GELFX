@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gelfx.ui.MainController" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gelfx.ui.MainController">
+   <children>
+      <Button fx:id="bashEnter" layoutX="47.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="ls -a" />
+      <Label fx:id="bashOut" layoutX="47.0" layoutY="113.0" prefHeight="84.0" prefWidth="311.0" />
+   </children>
+</AnchorPane>
