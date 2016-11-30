@@ -20,6 +20,7 @@ public class ControllersConfig {
         return loadView("main.fxml");
     }
 
+
     /**
      * Именно благодаря этому методу мы добавили контроллер в контекст спринга,
      * и заставили его произвести все необходимые инъекции.
@@ -28,6 +29,7 @@ public class ControllersConfig {
     public MainController getMainController() throws IOException {
         return (MainController) getMainView().getController();
     }
+
 
     /**
      * Самый обыкновенный способ использовать FXML загрузчик.

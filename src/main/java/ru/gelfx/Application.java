@@ -20,8 +20,11 @@ public class Application extends AbstractJavaFxApplicationSupport {
     @Autowired
     private ControllersConfig.View view;
 
+
+
     @Override
     public void start(Stage stage) throws Exception {
+
         stage.setTitle(windowTitle);
         stage.setScene(new Scene(view.getView()));
         stage.setResizable(true);
