@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
@@ -13,14 +14,10 @@ import java.util.Objects;
 @Service
 public class BashComandService {
 
-    public static void runSafe(final Runnable runnable) {
-        Objects.requireNonNull(runnable, "runnable");
-        if (Platform.isFxApplicationThread()) {
-            runnable.run();
-        }
-        else {
-            Platform.runLater(runnable);
-        }
+    public void openTerminal() throws IOException {
+        String command= "/usr/bin/xterm";
+        Runtime rt = Runtime.getRuntime();
+        Process pr = rt.exec(command);
     }
 
     public String executeCommand(String command) {

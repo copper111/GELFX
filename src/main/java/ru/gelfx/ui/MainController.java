@@ -11,9 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.*;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.gelfx.ControllersConfig;
 import ru.gelfx.services.BashComandService;
+import ru.gelfx.services.GitService;
 
 import java.io.IOException;
 
@@ -28,22 +32,30 @@ public class MainController {
     public TextField inputCommand;
     public MenuItem openRepMenu;
     public AnchorPane mainRoot;
+    public MenuItem openTerminal;
 
     @Autowired
     private BashComandService bashComandService;
 
+    @Autowired
+    private GitService gitService;
+
 
     public void onMouseClick(MouseEvent mouseEvent) {
         bashOut.setText(bashComandService.executeCommand(inputCommand.getText()));
-        //bashComandService.runSafe(() -> inputCommand.getText());
     }
 
 
-    public void onOpenRep(ActionEvent actionEvent) throws IOException {
+    public void onOpenRep(ActionEvent actionEvent) throws IOException, GitAPIException {
 
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Open repository directory");
-        bashOut.setText(chooser.showDialog(mainRoot.getScene().getWindow()).getAbsolutePath());
+
+        Repository repository;
+        repository = gitService.openExistingLocalRepository(chooser.showDialog(mainRoot.getScene().getWindow()).getAbsoluteFile());
+        bashOut.setText(repository.toString());
+
+
 
 
 
@@ -56,5 +68,9 @@ public class MainController {
         stage.setScene(new Scene(root1));
         stage.show();*/
 
+    }
+
+    public void onOpenTerminal(ActionEvent actionEvent) throws IOException {
+        bashComandService.openTerminal();
     }
 }
