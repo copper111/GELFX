@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.*;
+import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -40,22 +41,28 @@ public class MainController {
     @Autowired
     private GitService gitService;
 
+    private Git git;
+
 
     public void onMouseClick(MouseEvent mouseEvent) {
         bashOut.setText(bashComandService.executeCommand(inputCommand.getText()));
     }
 
 
-    public void onOpenRep(ActionEvent actionEvent) throws IOException, GitAPIException {
+    public void onOpenRep(ActionEvent actionEvent){
 
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Open repository directory");
+        try {
 
-        Repository repository;
-        repository = gitService.openExistingLocalRepository(chooser.showDialog(mainRoot.getScene().getWindow()).getAbsoluteFile());
-        bashOut.setText(repository.toString());
+            git = gitService.openExistingLocalRepository(chooser.showDialog(mainRoot.getScene().getWindow()).getAbsoluteFile());
+            bashOut.setText("Успешно открыт репозиторий: " + git.getRepository().toString());
+        } catch (IOException e) {
+            bashOut.setText("Ошибка при открытии репозитория(IOException): " + e.getMessage());
 
-
+        } catch (GitAPIException e) {
+            bashOut.setText("Ошибка при открытии репозитория(GitAPIException): " + e.getMessage());
+        }
 
 
 

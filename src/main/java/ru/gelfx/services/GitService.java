@@ -27,17 +27,31 @@ public class GitService {
     }
 
 
-
-
-    public Repository openExistingLocalRepository(File directory) throws GitAPIException, IOException {
+    /**
+     * Открывает указанный репозиторий
+     * @param directory
+     * @return
+     * @throws GitAPIException
+     * @throws IOException
+     */
+    public Git openExistingLocalRepository(File directory) throws GitAPIException, IOException, RuntimeException {
 
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
          localRepo = builder.setGitDir(directory)
                 .readEnvironment() // scan environment GIT_* variables
-                .findGitDir() // scan up the file system tree
+                .findGitDir().setMustExist(true) // scan up the file system tree
                 .build();
 
-        return localRepo;
+        git = new Git(localRepo);
+        return git;
 
+    }
+
+    public Git getGit() {
+        return git;
+    }
+
+    public void setGit(Git git) {
+        this.git = git;
     }
 }
