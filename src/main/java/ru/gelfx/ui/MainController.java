@@ -4,14 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.*;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -35,6 +33,8 @@ public class MainController {
     public MenuItem openRepMenu;
     public AnchorPane mainRoot;
     public MenuItem openTerminal;
+    public MenuItem gitStatusRepMenu;
+    public TextArea commonTextArea;
 
     @Autowired
     private BashComandService bashComandService;
@@ -80,5 +80,10 @@ public class MainController {
 
     public void onOpenTerminal(ActionEvent actionEvent) throws IOException {
         bashComandService.openTerminal();
+    }
+
+    public void onGetStatus(ActionEvent actionEvent) throws GitAPIException {
+        Status status = git.status().call();
+        commonTextArea.setText(status.getUntracked().toString());
     }
 }
