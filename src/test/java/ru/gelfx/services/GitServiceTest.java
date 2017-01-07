@@ -26,7 +26,7 @@ public class GitServiceTest {
 
     @Before
     public void init() throws IOException {
-        localPath = new File("/home/aer/work/aicup/mytestrep");
+        localPath = new File("/home/aer/work/aicup/mytestrep/");
     }
 
 

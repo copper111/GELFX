@@ -36,8 +36,9 @@ public class GitService {
      */
     public Git openExistingLocalRepository(File directory) throws GitAPIException, IOException, RuntimeException {
 
+        File gitDirectory = new File(directory + "/.git");
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
-         localRepo = builder.setGitDir(directory)
+         localRepo = builder.setGitDir(gitDirectory)
                 .readEnvironment() // scan environment GIT_* variables
                 .findGitDir()
                 .setMustExist(true) // scan up the file system tree

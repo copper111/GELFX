@@ -20,6 +20,7 @@ import ru.gelfx.ControllersConfig;
 import ru.gelfx.services.BashComandService;
 import ru.gelfx.services.GitService;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
