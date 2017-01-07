@@ -39,7 +39,8 @@ public class GitService {
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
          localRepo = builder.setGitDir(directory)
                 .readEnvironment() // scan environment GIT_* variables
-                .findGitDir().setMustExist(true) // scan up the file system tree
+                .findGitDir()
+                .setMustExist(true) // scan up the file system tree
                 .build();
 
         git = new Git(localRepo);
